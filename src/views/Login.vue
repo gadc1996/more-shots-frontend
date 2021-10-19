@@ -1,6 +1,7 @@
 <template>
   <div>
     <pre>{{ this.user }}</pre>
+    <AlertMessage></AlertMessage>
     <form @submit.prevent="logIn">
       <input v-model="form.email" type="email" placeholder="email" />
       <input v-model="form.password" type="password" placeholder="password" />
@@ -16,6 +17,9 @@ const { mapGetters, mapActions } = createNamespacedHelpers('Login')
 
 
 export default {
+  components: {
+    AlertMessage: () => import('@/components/AlertMessage')
+  },
   data: () => ({
     form: {},
   }),
