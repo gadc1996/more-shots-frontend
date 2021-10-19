@@ -1,6 +1,6 @@
-<template>
-  <div>
-    AlertMessage
+<template lang="pug">
+  .alert
+    p.text AlertMessage
   </div>
 </template>
 
@@ -10,5 +10,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang='scss'>
+.alert{
+  background-color: red;
+  .text {
+    color: blue;
+  }
+}
 </style>
