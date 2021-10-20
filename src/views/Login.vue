@@ -1,36 +1,42 @@
-<template>
-  <div>
-    <pre>{{ this.user }}</pre>
-    <AlertMessage></AlertMessage>
-    <form @submit.prevent="logIn">
-      <input v-model="form.email" type="email" placeholder="email" />
-      <input v-model="form.password" type="password" placeholder="password" />
-      <br />
-      <button>Login</button>
-    </form>
-  </div>
+<template lang="pug">
+  .wrapper
+    LoginForm
+    LoginImage
 </template>
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-const { mapGetters, mapActions } = createNamespacedHelpers('Login')
-
+const { mapGetters, mapActions } = createNamespacedHelpers("Login");
 
 export default {
   components: {
-    AlertMessage: () => import('@/components/AlertMessage')
+    AlertMessage: () => import("@/components/AlertMessage"),
+    LoginForm: () => import("@/components/LoginForm"),
+    LoginImage: () => import("@/components/LoginImage"),
   },
   data: () => ({
     form: {},
   }),
   computed: {
-    ...mapGetters(['user'])
+    ...mapGetters(["user"]),
   },
   methods: {
-    ...mapActions(['login']),
-    logIn(){
-      this.login(this.form)
-    }
+    ...mapActions(["login"]),
+    logIn() {
+      this.login(this.form);
+    },
   },
 };
 </script>
+
+<style lang="scss">
+.wrapper{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+}
+
+</style>
