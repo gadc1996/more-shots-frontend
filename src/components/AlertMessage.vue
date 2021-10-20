@@ -10,8 +10,8 @@ export default {
 };
 </script>
 
-<style lang='scss'>
-.alert{
+<style lang="scss">
+.alert {
   background-color: red;
   .text {
     color: blue;
