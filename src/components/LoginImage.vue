@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "LoginImage"
+  name: "LoginImage",
 };
 </script>
 
@@ -14,5 +14,3 @@ export default {
   background-size: cover;
 }
 </style>
-
-
