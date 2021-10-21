@@ -1,5 +1,8 @@
 # more-shots-frontend
 
+# Requirements
+Node: v14.17.6
+
 ## Project setup
 ```
 yarn install
