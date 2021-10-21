@@ -17,7 +17,7 @@ const mutations = {
 };
 
 const actions = {
-  async login({ commit }, payload) {
+  async loginUser({ commit }, payload) {
     try {
       const response = await axios.post(
         "http://more-shots.test/api/login",
@@ -26,7 +26,6 @@ const actions = {
       commit("SET_USER", response.data.data);
     } catch (error) {
       commit("SET_USER", {});
-      console.log(error.response.statusText);
     }
   },
 };
