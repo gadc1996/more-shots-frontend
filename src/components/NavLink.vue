@@ -5,18 +5,17 @@
 
 </template>
 <script>
-
 export default {
   name: "NavLink",
   props: {
     route: String,
-    icon: String
-  }
+    icon: String,
+  },
 };
 </script>
 
 <style lang="scss">
 .nav-link {
-  margin: .5rem auto;
+  margin: 0.5rem auto;
 }
 </style>

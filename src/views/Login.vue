@@ -1,5 +1,5 @@
 <template lang="pug">
-  .wrapper
+  .login
     LoginForm
     LoginImage
 </template>
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss">
-.wrapper {
+.login {
   display: grid;
   grid-template-columns: 1fr 2fr;
   width: 100vw;

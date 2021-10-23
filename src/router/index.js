@@ -19,17 +19,20 @@ const routes = [
   {
     path: "/dashboard",
     name: "Dashboard",
-    component: () => import(/* webpackChunkName: "dashboard" */ "../views/Dashboard.vue"),
+    component: () =>
+      import(/* webpackChunkName: "dashboard" */ "../views/Dashboard.vue"),
     children: [
       {
-        path: 'customers',
-        component: () => import(/* webpackChunkName: "customers" */ "../views/Customers.vue"),
+        path: "customers",
+        component: () =>
+          import(/* webpackChunkName: "customers" */ "../views/Customers.vue"),
       },
       {
-        path: 'events',
-        component: () => import(/* webpackChunkName: "customers" */ "../views/Events.vue"),
-      }
-    ] 
+        path: "events",
+        component: () =>
+          import(/* webpackChunkName: "customers" */ "../views/Events.vue"),
+      },
+    ],
   },
 ];
 

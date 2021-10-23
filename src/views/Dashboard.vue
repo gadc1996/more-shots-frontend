@@ -1,15 +1,12 @@
 <template lang="pug">
-  .wrapper
+  .dashboard
     NavBar
     router-view
 </template>
 
 <script>
-// import { createNamespacedHelpers } from "vuex";
-// const { mapGetters } = createNamespacedHelpers("Login");
-
 export default {
-  name: 'Dashboard',
+  name: "Dashboard",
   components: {
     NavBar: () => import("@/components/NavBar"),
   },
@@ -17,8 +14,11 @@ export default {
 </script>
 
 <style lang="scss">
-.wrapper {
+.dashboard {
   display: grid;
   grid-template-columns: 1fr 10fr;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
 }
 </style>

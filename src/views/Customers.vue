@@ -1,5 +1,5 @@
 <template lang="pug">
-  .container
+  .customers
     h2 Customers
 </template>
 
@@ -10,6 +10,8 @@ export default {
 </script>
 
 <style lang="scss">
-.container {
+.customers {
+  border-radius: 20px 0 0 20px;
+  background-color: white;
 }
 </style>

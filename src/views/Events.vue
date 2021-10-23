@@ -1,5 +1,5 @@
 <template lang="pug">
-  .container
+  .events
     h2 Events
 </template>
 
@@ -10,6 +10,8 @@ export default {
 </script>
 
 <style lang="scss">
-.container {
+.events {
+  border-radius: 20px 0 0 20px;
+  background-color: white;
 }
 </style>
