@@ -23,9 +23,9 @@ export default {
   box-shadow: 0px 0px;
   align-items: center;
   padding: 0.2rem;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
   border-radius: 5px;
-  box-shadow: 0 2px 8px 0 rgba(59,65,94,.1),0 1px 1px 0 rgba(0,0,0,.07);
+  box-shadow: 0 2px 8px 0 rgba(59, 65, 94, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.07);
 
   &:focus-within {
     border: 2px solid black;

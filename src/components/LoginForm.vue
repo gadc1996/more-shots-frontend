@@ -25,10 +25,10 @@ export default {
   },
   methods: {
     ...mapActions(["loginUser"]),
-    async login(){
-      await this.loginUser(this.newRecord)
-    }
-  }
+    async login() {
+      await this.loginUser(this.newRecord);
+    },
+  },
 };
 </script>
 
@@ -45,7 +45,7 @@ export default {
     }
   }
 
-  form{
+  form {
     display: flex;
     flex-direction: column;
     .submit {
@@ -53,8 +53,8 @@ export default {
       color: white;
       border: none;
       border-radius: 2px;
-      padding: .5rem 2rem;
-      margin: .5rem 0;
+      padding: 0.5rem 2rem;
+      margin: 0.5rem 0;
     }
   }
 }
