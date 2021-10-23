@@ -1,5 +1,5 @@
 <template lang="pug">
-  .flex-container
+  .login-form
     .logo
       img(src="@/assets/logo.png")
     h2 Iniciar sesion
@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style lang="scss">
-.flex-container {
+.login-form {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,6 +55,7 @@ export default {
       border-radius: 2px;
       padding: 0.5rem 2rem;
       margin: 0.5rem 0;
+      cursor: pointer;
     }
   }
 }
