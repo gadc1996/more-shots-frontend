@@ -9,12 +9,16 @@ Vue.use(Vuex);
 const state = {
   customers: {},
   columns: ["name", "email", "phone_number"],
+  isModalVisible: false,
 };
 
 const mutations = {
   SET_CUSTOMERS(state, payload) {
     state.customers = payload;
   },
+  SET_MODAL_VISIBLE(state, payload) {
+    state.isModalVisible = payload;
+  }
 };
 
 const actions = {
@@ -26,11 +30,15 @@ const actions = {
       commit("SET_CUSTOMERS", {});
     }
   },
+  setModalVisible({ commit }, payload) {
+    commit("SET_MODAL_VISIBLE", payload)
+  }
 };
 
 const getters = {
   customers: (state) => state.customers,
   columns: (state) => state.columns,
+  isModalVisible: (state) => state.isModalVisible,
 };
 
 export default {

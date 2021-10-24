@@ -1,11 +1,25 @@
 <template lang="pug">
-button.add-button
+button.add-button(@click="setModalVisible(true)")
   eva-icon(name="plus-outline")
   | Add
 </template>
 <script>
+import { createNamespacedHelpers } from "vuex";
+const { mapGetters, mapActions } = createNamespacedHelpers("Customers");
+
 export default {
   name: "AddButton",
+  methods: {
+    ...mapActions([
+      'setModalVisible'
+    ])
+  },
+  computed: {
+    ...mapGetters([
+      'isModalvisible'
+    ])
+  }
+
 };
 </script>
 
