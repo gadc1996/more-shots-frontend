@@ -1,11 +1,25 @@
 <template lang="pug">
-  .customers
-    h2 Customers
+  .customers {{customers}}
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
+const { mapGetters, mapActions } = createNamespacedHelpers("Customers");
 export default {
   name: "Customers",
+  async created(){
+    await this.loadCustomers()
+  },
+  methods: {
+    ...mapActions([
+      'loadCustomers'
+    ])
+  },
+  computed: {
+    ...mapGetters([
+      'customers'
+    ])
+  }
 };
 </script>
 
