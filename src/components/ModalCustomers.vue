@@ -2,11 +2,12 @@
 .modal
   .tools
     eva-icon.close-icon(name="close-outline" @click="setModalVisible(false)")
-      h2 Create Customer
-    form
+    h2 Create Customer
+    form(@submit.prevent="submitUser()")
       input(value="Juan")
       input(value="Juan@email.com")
       input(value="18237481298")
+      SubmitButton
 </template>
 
 <script>
@@ -16,6 +17,7 @@ export default {
   name: "Customers",
   components: {
     ToolBar: () => import("@/components/ToolBar"),
+    SubmitButton: () => import("@/components/SubmitButton"),
   },
   async created() {
     await this.loadCustomers();
@@ -24,6 +26,7 @@ export default {
     ...mapActions([
     "loadCustomers",
     "setModalVisible",
+    "submitUser",
     ]),
   },
   computed: {
@@ -35,18 +38,16 @@ export default {
 <style lang="scss">
 .modal {
   position: absolute;
-  background-color: coral;
   top: 10%;
-  right: 10%;
-  width: 80%;
-  height: 80%;
+  background-color: white;
+  border: 1px solid black;
+  right: 25%;
+  width: 50%;
   border-radius: 20px;
+  padding: 1rem;
   .close-icon{
     display: block;
     text-align: right;
-    padding: 15px 15px 0 0;
-    right: 15px;
-    top: 15px;
     cursor: pointer;
   }
   form {

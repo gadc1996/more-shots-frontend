@@ -7,7 +7,7 @@
     form(@submit.prevent="login").login-form
       LoginInput(placeholder="Email" icon="people-outline" :value='newRecord.email' v-model="newRecord.email")
       LoginInput(placeholder="Password" icon="email-outline" :value='newRecord.email' v-model="newRecord.password")
-      button.submit(type="submit") Login
+      SubmitButton
 </template>
 <script>
 import { createNamespacedHelpers } from "vuex";
@@ -22,6 +22,7 @@ export default {
   }),
   components: {
     LoginInput: () => import("@/components/LoginInput"),
+    SubmitButton: () => import("@/components/SubmitButton"),
   },
   methods: {
     ...mapActions(["loginUser"]),
@@ -48,15 +49,6 @@ export default {
   form {
     display: flex;
     flex-direction: column;
-    .submit {
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 2px;
-      padding: 0.5rem 2rem;
-      margin: 0.5rem 0;
-      cursor: pointer;
-    }
   }
 }
 </style>

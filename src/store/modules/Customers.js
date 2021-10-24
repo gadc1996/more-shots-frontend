@@ -32,6 +32,9 @@ const actions = {
   },
   setModalVisible({ commit }, payload) {
     commit("SET_MODAL_VISIBLE", payload)
+  },
+  submitUser() {
+    console.log('user submited')
   }
 };
 
