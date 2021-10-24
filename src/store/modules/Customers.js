@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 const state = {
   customers: {},
+  columns: ["name", "email", "phone_number"],
 };
 
 const mutations = {
@@ -29,6 +30,7 @@ const actions = {
 
 const getters = {
   customers: (state) => state.customers,
+  columns: (state) => state.columns,
 };
 
 export default {

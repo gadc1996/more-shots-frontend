@@ -16,5 +16,6 @@ export default {
 .nav-bar {
   display: flex;
   flex-direction: column;
+  background-color: inherit;
 }
 </style>

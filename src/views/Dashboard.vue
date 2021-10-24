@@ -19,6 +19,6 @@ export default {
   grid-template-columns: 1fr 10fr;
   width: 100vw;
   height: 100vh;
-  background-color: black;
+  background-color: #000;
 }
 </style>
