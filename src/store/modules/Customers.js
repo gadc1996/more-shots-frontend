@@ -7,63 +7,74 @@ axios.defaults.withCredentials = true;
 Vue.use(Vuex);
 
 const state = {
-  customers: {},
-  columns: ["name", "email", "phone_number"],
+  resources: {},
   isModalVisible: false,
   storeResource: true,
+
+  columns: [
+  "name", 
+  "email", 
+  "phone_number"
+  ],
 };
 
 const mutations = {
-  SET_CUSTOMERS(state, payload) {
-    state.customers = payload;
+  SET_RESOURCES(state, payload) {
+    state.resources= payload;
   },
   SET_MODAL_VISIBLE(state, payload) {
     state.isModalVisible = payload;
   },
   SET_STORE_RESOURCE(state, payload) {
-    state.storeResource = payload
+    state.storeResource = payload;
   },
-  ADD_CUSTOMER(state, payload) {
+  ADD_RESOURCE(state, payload) {
     state.customers.unshift(payload);
   },
   DESTROY_RESOURCE(state, payload) {
-    const index = state.customers.findIndex(u => u.id === payload.id)
+    const index = state.customers.findIndex((u) => u.id === payload.id);
 
     if (index >= 0) {
-      Vue.delete(state.customers, index)
+      Vue.delete(state.customers, index);
     }
   },
   UPDATE_RESOURCE(state, payload) {
-    const index = state.customers.findIndex(u => u.id === payload.id)
+    const index = state.customers.findIndex((u) => u.id === payload.id);
 
     if (index >= 0) {
-      Vue.set(state.customers, index)
+      Vue.set(state.customers, index, payload);
     }
-  }
+  },
 };
 
 const actions = {
-  async loadCustomers({ commit }) {
+  async loadResources({ commit }) {
     try {
       const response = await axios.get("http://more-shots.test/api/customers");
-      commit("SET_CUSTOMERS", response.data);
+      commit("SET_RESOURCES", response.data);
     } catch (error) {
-      commit("SET_CUSTOMERS", {});
+      commit("SET_RESOURCES", {});
     }
   },
-  setModalVisible({ commit }, payload) {
-    commit("SET_MODAL_VISIBLE", payload);
-  },
-  setAddResource({ commit }, payload) {
-    commit('SET_STORE_RESOURCE', payload)
-  },
-  async createCustomer({ commit }, payload) {
+  async store({ commit }, payload) {
     try {
       const response = await axios.post(
         "http://more-shots.test/api/customers",
         payload
       );
-      commit("ADD_CUSTOMER", response.data);
+      commit("ADD_RESOURCE", response.data);
+      commit("SET_MODAL_VISIBLE", false);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  async update({ commit }, payload) {
+    try {
+      const response = await axios.put(
+        `http://more-shots.test/api/customers/${payload.id}`,
+        payload
+      );
+      commit("UPDATE_RESOURCE", response.data);
       commit("SET_MODAL_VISIBLE", false);
     } catch (error) {
       console.log(error);
@@ -71,25 +82,22 @@ const actions = {
   },
   async destroy({ commit }, payload) {
     try {
-      axios.delete(`http://more-shots.test/api/customers/${payload.id}`)
-      commit('DESTROY_RESOURCE', payload)
-    } catch (error){
-      console.log(error)
+      axios.delete(`http://more-shots.test/api/customers/${payload.id}`);
+      commit("DESTROY_RESOURCE", payload);
+    } catch (error) {
+      console.log(error);
     }
   },
-  async update({ commit }, payload) {
-    try {
-      const response =  axios.put(`http://more-shots.test/api/customers/${payload.id}`, payload)
-      // commit("UPDATE_RESOURCE", payload);
-      commit("SET_MODAL_VISIBLE", false);
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  setModalVisible({ commit }, payload) {
+    commit("SET_MODAL_VISIBLE", payload);
+  },
+  setAddResource({ commit }, payload) {
+    commit("SET_STORE_RESOURCE", payload);
+  },
 };
 
 const getters = {
-  customers: (state) => state.customers,
+  resources: (state) => state.resources,
   columns: (state) => state.columns,
   isModalVisible: (state) => state.isModalVisible,
   storeResource: (state) => state.storeResource,

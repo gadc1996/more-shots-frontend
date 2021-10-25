@@ -4,7 +4,7 @@
     eva-icon.close-icon(name="close-outline" @click="setModalVisible(false)")
     h2(v-if="storeResource") Create Customer
     h2(v-if="!storeResource") Update Customer
-    form(@submit.prevent="submitCustomer()")
+    form(@submit.prevent="submitResource()")
       ModalInput(placeholder="First Name" :value="newRecord.first_name" v-model="newRecord.first_name")
       ModalInput(placeholder="Last Name" :value="newRecord.last_name" v-model="newRecord.last_name")
       ModalInput(placeholder="Email" :value="newRecord.email" v-model="newRecord.email")
@@ -14,16 +14,16 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-const { mapGetters, mapActions } = createNamespacedHelpers("Customers");
+const { mapActions } = createNamespacedHelpers("Customers");
 export default {
-  name: "Customers",
+  name: "ModalCustomers",
   props: {
     newRecord: {
       type: Object,
     },
     storeResource: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   components: {
     ModalInput: () => import("@/components/ModalInput"),
@@ -34,18 +34,16 @@ export default {
   },
   methods: {
     ...mapActions([
-    "loadCustomers", 
-    "setModalVisible", 
-    "createCustomer",
-    "update",
+      "setModalVisible",
+      "store",
+      "update",
     ]),
-    submitCustomer() {
-      this.storeResource ? this.createCustomer(this.newRecord) : this.update(this.newRecord)
+    submitResource() {
+      this.storeResource
+        ? this.store(this.newRecord)
+        : this.update(this.newRecord);
     },
-  },
-  computed: {
-    ...mapGetters(["customers", "columns"]),
-  },
+  }
 };
 </script>
 

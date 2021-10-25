@@ -10,15 +10,15 @@
         | Add
     table
       TableHeader(:columns="columns")
-      tr(v-for="customer in customers") 
-        td {{ customer.full_name }}
-        td {{ customer.email }}
-        td {{ customer.phone_number }}
+      tr(v-for="resource in resources") 
+        td {{ resource.full_name }}
+        td {{ resource.email }}
+        td {{ resource.phone_number }}
         td.table-options
-          button(@click="updateResource(customer)").update-button
+          button(@click="updateResource(resource)").update-button
             eva-icon(name="edit-2-outline")
 
-          button.delete-button
+          button(@click="deleteResource(resource)").delete-button
             eva-icon(name="trash-2-outline")
 </template>
 
@@ -35,35 +35,31 @@ export default {
     newRecord: {},
   }),
   async created() {
-    await this.loadCustomers();
+    await this.loadResources();
   },
   methods: {
     ...mapActions([
-    "loadCustomers",
-    "setAddResource",
-    "setModalVisible",
-    "destroy"
+      "loadResources",
+      "setAddResource",
+      "setModalVisible",
+      "destroy",
     ]),
     addResource() {
-      this.setAddResource(true)
-      this.setModalVisible(true)
+      this.newRecord = {};
+      this.setAddResource(true);
+      this.setModalVisible(true);
     },
     updateResource(resource) {
-      this.newRecord = resource
-      this.setAddResource(false)
-      this.setModalVisible(true)
+      this.newRecord = resource;
+      this.setAddResource(false);
+      this.setModalVisible(true);
     },
-    removeResource(resource){
-      this.destroy(resource)
-    }
+    deleteResource(resource) {
+      this.destroy(resource);
+    },
   },
   computed: {
-    ...mapGetters([
-    "customers", 
-    "columns", 
-    "isModalVisible",
-    "storeResource"
-    ]),
+    ...mapGetters(["resources", "columns", "isModalVisible", "storeResource"]),
   },
 };
 </script>
@@ -113,7 +109,7 @@ export default {
       &:hover {
         background-color: darken(#fff, 15%);
       }
-      &:first-child{
+      &:first-child {
         background-color: black;
         &:hover {
           background-color: black;

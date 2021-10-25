@@ -9,17 +9,16 @@ export default {
   name: "TableHeader",
   props: {
     columns: {
-      type: Array
-    }
-  }
+      type: Array,
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-.table-header{
+.table-header {
   background-color: inherit;
   padding: 10px 0;
   color: #fff;
-} 
+}
 </style>
-
