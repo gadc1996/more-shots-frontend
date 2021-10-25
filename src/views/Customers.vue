@@ -1,7 +1,13 @@
 <template lang="pug">
   .customers 
-    ModalCustomers(:newRecord='newRecord' v-if="isModalVisible")
-    ToolBar
+    Modal(:newRecord='newRecord' :storeResource="storeResource" v-if="isModalVisible")
+    .tool-bar
+      .page-information
+        h1.title Customers
+        h2.subtitle A list of your customers:
+      button.add-button(@click="addResource")
+        eva-icon(name="plus-outline")
+        | Add
     table
       TableHeader(:columns="columns")
       tr(v-for="customer in customers") 
@@ -9,9 +15,10 @@
         td {{ customer.email }}
         td {{ customer.phone_number }}
         td.table-options
-          button.update-button
+          button(@click="updateResource(customer)").update-button
             eva-icon(name="edit-2-outline")
-          button(@click="removeResource(customer)").delete-button
+
+          button.delete-button
             eva-icon(name="trash-2-outline")
 </template>
 
@@ -21,9 +28,8 @@ const { mapGetters, mapActions } = createNamespacedHelpers("Customers");
 export default {
   name: "Customers",
   components: {
-    ToolBar: () => import("@/components/ToolBar"),
     TableHeader: () => import("@/components/TableHeader"),
-    ModalCustomers: () => import("@/components/ModalCustomers"),
+    Modal: () => import("@/components/ModalCustomers"),
   },
   data: () => ({
     newRecord: {},
@@ -34,14 +40,30 @@ export default {
   methods: {
     ...mapActions([
     "loadCustomers",
+    "setAddResource",
+    "setModalVisible",
     "destroy"
     ]),
+    addResource() {
+      this.setAddResource(true)
+      this.setModalVisible(true)
+    },
+    updateResource(resource) {
+      this.newRecord = resource
+      this.setAddResource(false)
+      this.setModalVisible(true)
+    },
     removeResource(resource){
       this.destroy(resource)
     }
   },
   computed: {
-    ...mapGetters(["customers", "columns", "isModalVisible"]),
+    ...mapGetters([
+    "customers", 
+    "columns", 
+    "isModalVisible",
+    "storeResource"
+    ]),
   },
 };
 </script>
@@ -51,6 +73,35 @@ export default {
   border-radius: 20px 0 0 20px;
   background-color: white;
   position: relative;
+
+  .tool-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+
+    .page-information {
+      text-align: left;
+
+      .title,
+      .subtitle {
+        margin: 0;
+      }
+    }
+    .add-button {
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      border: none;
+      border-radius: 2px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      background-color: darken(#fff, 10%);
+      &:hover {
+        background-color: darken(#fff, 15%);
+      }
+    }
+  }
 
   table {
     border-collapse: collapse;

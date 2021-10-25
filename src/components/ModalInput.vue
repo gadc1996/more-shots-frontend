@@ -1,6 +1,6 @@
 <template lang="pug">
   .modal-input
-    input(:placeholder="placeholder" @input="$emit('input', $event.target.value)")
+    input(:placeholder="placeholder" @input="$emit('input', $event.target.value)" :value="value")
 </template>
 <script>
 export default {
@@ -8,6 +8,7 @@ export default {
   props: {
     placeholder: String,
     newRecord: Object,
+    value: String,
   },
 };
 </script>

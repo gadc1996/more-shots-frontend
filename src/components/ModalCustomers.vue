@@ -2,7 +2,8 @@
 .modal
   .tools
     eva-icon.close-icon(name="close-outline" @click="setModalVisible(false)")
-    h2 Create Customer
+    h2(v-if="storeResource") Create Customer
+    h2(v-if="!storeResource") Update Customer
     form(@submit.prevent="submitCustomer()")
       ModalInput(placeholder="First Name" :value="newRecord.first_name" v-model="newRecord.first_name")
       ModalInput(placeholder="Last Name" :value="newRecord.last_name" v-model="newRecord.last_name")
@@ -20,9 +21,11 @@ export default {
     newRecord: {
       type: Object,
     },
+    storeResource: {
+      type: Boolean
+    }
   },
   components: {
-    ToolBar: () => import("@/components/ToolBar"),
     ModalInput: () => import("@/components/ModalInput"),
     SubmitButton: () => import("@/components/SubmitButton"),
   },
@@ -30,9 +33,14 @@ export default {
     await this.loadCustomers();
   },
   methods: {
-    ...mapActions(["loadCustomers", "setModalVisible", "createCustomer"]),
+    ...mapActions([
+    "loadCustomers", 
+    "setModalVisible", 
+    "createCustomer",
+    "update",
+    ]),
     submitCustomer() {
-      this.createCustomer(this.newRecord);
+      this.storeResource ? this.createCustomer(this.newRecord) : this.update(this.newRecord)
     },
   },
   computed: {

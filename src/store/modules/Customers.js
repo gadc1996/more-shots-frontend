@@ -10,7 +10,7 @@ const state = {
   customers: {},
   columns: ["name", "email", "phone_number"],
   isModalVisible: false,
-  destroy: 1,
+  storeResource: true,
 };
 
 const mutations = {
@@ -20,6 +20,9 @@ const mutations = {
   SET_MODAL_VISIBLE(state, payload) {
     state.isModalVisible = payload;
   },
+  SET_STORE_RESOURCE(state, payload) {
+    state.storeResource = payload
+  },
   ADD_CUSTOMER(state, payload) {
     state.customers.unshift(payload);
   },
@@ -28,6 +31,13 @@ const mutations = {
 
     if (index >= 0) {
       Vue.delete(state.customers, index)
+    }
+  },
+  UPDATE_RESOURCE(state, payload) {
+    const index = state.customers.findIndex(u => u.id === payload.id)
+
+    if (index >= 0) {
+      Vue.set(state.customers, index)
     }
   }
 };
@@ -43,6 +53,9 @@ const actions = {
   },
   setModalVisible({ commit }, payload) {
     commit("SET_MODAL_VISIBLE", payload);
+  },
+  setAddResource({ commit }, payload) {
+    commit('SET_STORE_RESOURCE', payload)
   },
   async createCustomer({ commit }, payload) {
     try {
@@ -63,6 +76,15 @@ const actions = {
     } catch (error){
       console.log(error)
     }
+  },
+  async update({ commit }, payload) {
+    try {
+      const response =  axios.put(`http://more-shots.test/api/customers/${payload.id}`, payload)
+      // commit("UPDATE_RESOURCE", payload);
+      commit("SET_MODAL_VISIBLE", false);
+    } catch (error) {
+      console.log(error)
+    }
   }
 };
 
@@ -70,6 +92,7 @@ const getters = {
   customers: (state) => state.customers,
   columns: (state) => state.columns,
   isModalVisible: (state) => state.isModalVisible,
+  storeResource: (state) => state.storeResource,
 };
 
 export default {
