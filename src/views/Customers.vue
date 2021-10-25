@@ -3,15 +3,12 @@
     ModalCustomers(:newRecord='newRecord' v-if="isModalVisible")
     ToolBar
     table
-      tr.headers
-        th(v-for="column in columns") {{ column }}
-        th Options
+      TableHeader(:columns="columns")
       tr(v-for="customer in customers") 
         td {{ customer.full_name }}
         td {{ customer.email }}
         td {{ customer.phone_number }}
-        td 
-          button ...
+        TableOptions
 </template>
 
 <script>
@@ -21,7 +18,9 @@ export default {
   name: "Customers",
   components: {
     ToolBar: () => import("@/components/ToolBar"),
+    TableHeader: () => import("@/components/TableHeader"),
     ModalCustomers: () => import("@/components/ModalCustomers"),
+    TableOptions: () => import("@/components/TableOptions"),
   },
   data: () => ({
     newRecord: {},
@@ -48,14 +47,11 @@ export default {
     border-collapse: collapse;
     width: 100%;
     tr {
-      th {
-        background-color: #000;
-        padding: 10px 0;
-        color: #fff;
-      }
-
       &:nth-child(odd) {
         background-color: darken(#fff, 10%);
+      }
+      &:first-child{
+        background-color: black;
       }
       &:hover {
         background-color: darken(#fff, 15%);
