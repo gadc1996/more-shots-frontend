@@ -10,16 +10,11 @@ const { mapGetters, mapActions } = createNamespacedHelpers("Customers");
 export default {
   name: "AddButton",
   methods: {
-    ...mapActions([
-      'setModalVisible'
-    ])
+    ...mapActions(["setModalVisible"]),
   },
   computed: {
-    ...mapGetters([
-      'isModalvisible'
-    ])
-  }
-
+    ...mapGetters(["isModalvisible"]),
+  },
 };
 </script>
 

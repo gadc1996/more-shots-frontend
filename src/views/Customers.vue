@@ -1,6 +1,6 @@
 <template lang="pug">
   .customers 
-    ModalCustomers(v-if="isModalVisible")
+    ModalCustomers(:newRecord='newRecord' v-if="isModalVisible")
     ToolBar
     table
       tr.headers
@@ -24,7 +24,8 @@ export default {
     ModalCustomers: () => import("@/components/ModalCustomers"),
   },
   data: () => ({
-  }), 
+    newRecord: {},
+  }),
   async created() {
     await this.loadCustomers();
   },
@@ -32,11 +33,7 @@ export default {
     ...mapActions(["loadCustomers"]),
   },
   computed: {
-    ...mapGetters([
-    "customers", 
-    "columns",
-    "isModalVisible",
-    ]),
+    ...mapGetters(["customers", "columns", "isModalVisible"]),
   },
 };
 </script>
@@ -50,7 +47,7 @@ export default {
   table {
     border-collapse: collapse;
     width: 100%;
-    tr{
+    tr {
       th {
         background-color: #000;
         padding: 10px 0;

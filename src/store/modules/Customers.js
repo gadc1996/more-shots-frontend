@@ -18,7 +18,10 @@ const mutations = {
   },
   SET_MODAL_VISIBLE(state, payload) {
     state.isModalVisible = payload;
-  }
+  },
+  ADD_CUSTOMER(state, payload) {
+    state.customers.unshift(payload);
+  },
 };
 
 const actions = {
@@ -31,11 +34,20 @@ const actions = {
     }
   },
   setModalVisible({ commit }, payload) {
-    commit("SET_MODAL_VISIBLE", payload)
+    commit("SET_MODAL_VISIBLE", payload);
   },
-  submitUser() {
-    console.log('user submited')
-  }
+  async createCustomer({ commit }, payload) {
+    try {
+      const response = await axios.post(
+        "http://more-shots.test/api/customers",
+        payload
+      );
+      commit("ADD_CUSTOMER", response.data);
+      commit("SET_MODAL_VISIBLE", false);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 const getters = {

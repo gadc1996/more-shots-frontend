@@ -23,7 +23,8 @@ export default {
   .page-information {
     text-align: left;
 
-    .title, .subtitle {
+    .title,
+    .subtitle {
       margin: 0;
     }
   }
