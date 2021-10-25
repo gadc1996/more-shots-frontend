@@ -10,6 +10,7 @@ const state = {
   customers: {},
   columns: ["name", "email", "phone_number"],
   isModalVisible: false,
+  destroy: 1,
 };
 
 const mutations = {
@@ -22,6 +23,13 @@ const mutations = {
   ADD_CUSTOMER(state, payload) {
     state.customers.unshift(payload);
   },
+  DESTROY_RESOURCE(state, payload) {
+    const index = state.customers.findIndex(u => u.id === payload.id)
+
+    if (index >= 0) {
+      Vue.delete(state.customers, index)
+    }
+  }
 };
 
 const actions = {
@@ -48,6 +56,14 @@ const actions = {
       console.log(error);
     }
   },
+  async destroy({ commit }, payload) {
+    try {
+      axios.delete(`http://more-shots.test/api/customers/${payload.id}`)
+      commit('DESTROY_RESOURCE', payload)
+    } catch (error){
+      console.log(error)
+    }
+  }
 };
 
 const getters = {

@@ -8,7 +8,11 @@
         td {{ customer.full_name }}
         td {{ customer.email }}
         td {{ customer.phone_number }}
-        TableOptions
+        td.table-options
+          button.update-button
+            eva-icon(name="edit-2-outline")
+          button(@click="removeResource(customer)").delete-button
+            eva-icon(name="trash-2-outline")
 </template>
 
 <script>
@@ -20,7 +24,6 @@ export default {
     ToolBar: () => import("@/components/ToolBar"),
     TableHeader: () => import("@/components/TableHeader"),
     ModalCustomers: () => import("@/components/ModalCustomers"),
-    TableOptions: () => import("@/components/TableOptions"),
   },
   data: () => ({
     newRecord: {},
@@ -29,7 +32,13 @@ export default {
     await this.loadCustomers();
   },
   methods: {
-    ...mapActions(["loadCustomers"]),
+    ...mapActions([
+    "loadCustomers",
+    "destroy"
+    ]),
+    removeResource(resource){
+      this.destroy(resource)
+    }
   },
   computed: {
     ...mapGetters(["customers", "columns", "isModalVisible"]),
@@ -50,11 +59,34 @@ export default {
       &:nth-child(odd) {
         background-color: darken(#fff, 10%);
       }
-      &:first-child{
-        background-color: black;
-      }
       &:hover {
         background-color: darken(#fff, 15%);
+      }
+      &:first-child{
+        background-color: black;
+        &:hover {
+          background-color: black;
+        }
+      }
+    }
+    .update-button {
+      align-items: center;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      background-color: yellow;
+      &:hover {
+        background-color: darken(yellow, 10%);
+      }
+    }
+    .delete-button {
+      align-items: center;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      background-color: lighten(red, 15%);
+      &:hover {
+        background-color: red;
       }
     }
   }
