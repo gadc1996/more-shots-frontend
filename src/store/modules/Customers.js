@@ -29,20 +29,21 @@ const mutations = {
     state.storeResource = payload;
   },
   ADD_RESOURCE(state, payload) {
-    state.customers.unshift(payload);
+    console.log(payload);
+    state.resources.unshift(payload);
   },
   DESTROY_RESOURCE(state, payload) {
-    const index = state.customers.findIndex((u) => u.id === payload.id);
+    const index = state.resources.findIndex((u) => u.id === payload.id);
 
     if (index >= 0) {
-      Vue.delete(state.customers, index);
+      Vue.delete(state.resources, index);
     }
   },
   UPDATE_RESOURCE(state, payload) {
-    const index = state.customers.findIndex((u) => u.id === payload.id);
+    const index = state.resources.findIndex((u) => u.id === payload.id);
 
     if (index >= 0) {
-      Vue.set(state.customers, index, payload);
+      Vue.set(state.resources, index, payload);
     }
   },
 };
@@ -51,7 +52,7 @@ const actions = {
   async loadResources({ commit }) {
     try {
       const response = await axios.get("http://more-shots.test/api/customers");
-      commit("SET_RESOURCES", response.data);
+      commit("SET_RESOURCES", response.data.data);
     } catch (error) {
       commit("SET_RESOURCES", {});
     }
@@ -62,7 +63,7 @@ const actions = {
         "http://more-shots.test/api/customers",
         payload
       );
-      commit("ADD_RESOURCE", response.data);
+      commit("ADD_RESOURCE", response.data.data);
       commit("SET_MODAL_VISIBLE", false);
     } catch (error) {
       console.log(error);
@@ -74,7 +75,7 @@ const actions = {
         `http://more-shots.test/api/customers/${payload.id}`,
         payload
       );
-      commit("UPDATE_RESOURCE", response.data);
+      commit("UPDATE_RESOURCE", response.data.data);
       commit("SET_MODAL_VISIBLE", false);
     } catch (error) {
       console.log(error);
