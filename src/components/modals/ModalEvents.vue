@@ -2,21 +2,23 @@
 .modal
   .tools
     eva-icon.close-icon(name="close-outline" @click="setModalVisible(false)")
-    h2(v-if="storeResource") Create Customer
-    h2(v-if="!storeResource") Update Customer
+    h2(v-if="storeResource") Create Event
+    h2(v-if="!storeResource") Update Event
     form(@submit.prevent="submitResource()")
-      ModalInput(placeholder="First Name" :value="newRecord.first_name" v-model="newRecord.first_name")
-      ModalInput(placeholder="Last Name" :value="newRecord.last_name" v-model="newRecord.last_name")
-      ModalInput(placeholder="Email" :value="newRecord.email" v-model="newRecord.email")
-      ModalInput(placeholder="Phone Number" :value="newRecord.phone_number" v-model="newRecord.phone_number")
+      ModalInput(placeholder="Comments" :value="newRecord.comments" v-model="newRecord.comments")
+      ModalInput(placeholder="DateTime" :value="newRecord.datetime" v-model="newRecord.datetime")
+      ModalInput(placeholder="Guest Number" :value="newRecord.guests_number" v-model="newRecord.guests_number")
+      ModalInput(placeholder="Location" :value="newRecord.location" v-model="newRecord.location")
+      ModalInput(placeholder="Payed" :value="newRecord.payed" v-model="newRecord.payed")
+      ModalInput(placeholder="Price" :value="newRecord.price" v-model="newRecord.price")
       SubmitButton
 </template>
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-const { mapActions } = createNamespacedHelpers("Customers");
+const { mapActions } = createNamespacedHelpers("Events");
 export default {
-  name: "ModalCustomers",
+  name: "ModalEvents",
   props: {
     newRecord: {
       type: Object,
@@ -26,14 +28,15 @@ export default {
     },
   },
   components: {
-    ModalInput: () => import("@/components/ModalInput"),
+    ModalInput: () => import("@/components/modals/ModalInput"),
     SubmitButton: () => import("@/components/SubmitButton"),
   },
-  async created() {
-    await this.loadCustomers();
-  },
   methods: {
-    ...mapActions(["setModalVisible", "store", "update"]),
+    ...mapActions([
+    "setModalVisible", 
+    "store", 
+    "update"
+    ]),
     submitResource() {
       this.storeResource
         ? this.store(this.newRecord)

@@ -27,7 +27,7 @@ export default {
   name: "Customers",
   components: {
     TableHeader: () => import("@/components/TableHeader"),
-    Modal: () => import("@/components/ModalCustomers"),
+    Modal: () => import("@/components/modals/ModalCustomers"),
   },
   data: () => ({
     newRecord: {},

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .events
+  .event-types
     Modal(:newRecord='newRecord' :storeResource="storeResource" v-if="isModalVisible")
     .tool-bar
       .page-information
@@ -22,12 +22,12 @@
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-const { mapGetters, mapActions } = createNamespacedHelpers("Events");
+const { mapGetters, mapActions } = createNamespacedHelpers("EventTypes");
 export default {
-  name: "Events",
+  name: "EventTypes",
   components: {
     TableHeader: () => import("@/components/TableHeader"),
-    Modal: () => import("@/components/modals/ModalEvents"),
+    Modal: () => import("@/components/modals/ModalEventTypes"),
   },
   data: () => ({
     newRecord: {},
@@ -69,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss">
-.events {
+.event-types {
   border-radius: 20px 0 0 20px;
   background-color: white;
   position: relative;

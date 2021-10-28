@@ -2,22 +2,18 @@
 .modal
   .tools
     eva-icon.close-icon(name="close-outline" @click="setModalVisible(false)")
-    h2(v-if="storeResource") Create Event
-    h2(v-if="!storeResource") Update Event
+    h2(v-if="storeResource") Create Event Type
+    h2(v-if="!storeResource") Update Event Type
     form(@submit.prevent="submitResource()")
-      ModalInput(placeholder="Comments" :value="newRecord.comments" v-model="newRecord.comments")
-      ModalInput(placeholder="Guest Number" :value="newRecord.guest_number" v-model="newRecord.guest_number")
-      ModalInput(placeholder="Location" :value="newRecord.location" v-model="newRecord.location")
-      ModalInput(placeholder="Payed" :value="newRecord.payed" v-model="newRecord.payed")
-      ModalInput(placeholder="Price" :value="newRecord.price" v-model="newRecord.price")
+      ModalInput(placeholder="Name" :value="newRecord.name" v-model="newRecord.name")
       SubmitButton
 </template>
 
 <script>
 import { createNamespacedHelpers } from "vuex";
-const { mapActions } = createNamespacedHelpers("Events");
+const { mapActions } = createNamespacedHelpers("EventTypes");
 export default {
-  name: "ModalEvents",
+  name: "ModalEventTypes",
   props: {
     newRecord: {
       type: Object,
@@ -27,7 +23,7 @@ export default {
     },
   },
   components: {
-    ModalInput: () => import("@/components/ModalInput"),
+    ModalInput: () => import("@/components/modals/ModalInput"),
     SubmitButton: () => import("@/components/SubmitButton"),
   },
   methods: {
@@ -78,4 +74,3 @@ export default {
   }
 }
 </style>
-

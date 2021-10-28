@@ -13,6 +13,7 @@ const state = {
   pageTitle: "Events",
   columns: [
     'comments',
+    'datetime',
     'guests_number',
     'location',
     'payed',
@@ -31,7 +32,6 @@ const mutations = {
     state.storeResource = payload;
   },
   ADD_RESOURCE(state, payload) {
-    console.log(payload);
     state.resources.unshift(payload);
   },
   DESTROY_RESOURCE(state, payload) {
@@ -54,7 +54,6 @@ const actions = {
   async loadResources({ commit }) {
     try {
       const response = await axios.get("http://more-shots.test/api/events");
-      console.log(response.data.data)
       commit("SET_RESOURCES", response.data.data);
     } catch (error) {
       commit("SET_RESOURCES", {});

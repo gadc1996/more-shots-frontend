@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 
 Vue.use(VueRouter);
@@ -8,8 +7,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    redirect: '/dashboard' 
   },
   {
     path: "/login",
@@ -30,8 +28,18 @@ const routes = [
       {
         path: "events",
         component: () =>
-          import(/* webpackChunkName: "customers" */ "../views/Events.vue"),
+          import(/* webpackChunkName: "events" */ "../views/Events.vue"),
       },
+      {
+        path: "event-types",
+        component: () =>
+          import(/* webpackChunkName: "event-types" */ "../views/EventTypes.vue"),
+      },
+      {
+        path: "waiters",
+        component: () =>
+          import(/* webpackChunkName: "waiters" */ "../views/Waiters.vue"),
+      }
     ],
   },
 ];
