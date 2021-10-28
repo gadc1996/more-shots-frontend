@@ -33,17 +33,13 @@ export default {
     await this.loadCustomers();
   },
   methods: {
-    ...mapActions([
-      "setModalVisible",
-      "store",
-      "update",
-    ]),
+    ...mapActions(["setModalVisible", "store", "update"]),
     submitResource() {
       this.storeResource
         ? this.store(this.newRecord)
         : this.update(this.newRecord);
     },
-  }
+  },
 };
 </script>
 

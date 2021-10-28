@@ -11,16 +11,12 @@ const state = {
   isModalVisible: false,
   storeResource: true,
 
-  columns: [
-  "name", 
-  "email", 
-  "phone_number"
-  ],
+  columns: ["name", "email", "phone_number"],
 };
 
 const mutations = {
   SET_RESOURCES(state, payload) {
-    state.resources= payload;
+    state.resources = payload;
   },
   SET_MODAL_VISIBLE(state, payload) {
     state.isModalVisible = payload;
