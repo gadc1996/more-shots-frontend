@@ -1,6 +1,6 @@
 <template lang="pug">
   .customers 
-    Modal(:newRecord='newRecord' :storeResource="storeResource" v-if="isModalVisible")
+    Modal(:newRecord='newRecord' :storeResource="storeResource" :fillable="fillable" v-if="isModalVisible")
     .tool-bar
       .page-information
         h1.title {{ pageTitle }}
@@ -59,6 +59,7 @@ export default {
   computed: {
     ...mapGetters([
       "columns",
+      "fillable",
       "isModalVisible",
       "pageTitle",
       "resources",

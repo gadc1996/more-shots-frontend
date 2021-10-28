@@ -10,18 +10,14 @@ const state = {
   resources: {},
   isModalVisible: false,
   storeResource: true,
-  pageTitle: "Customers",
+  pageTitle: "Events",
   columns: [
-  "full_name", 
-  "email", 
-  "phone_number"
+    'comments',
+    'guests_number',
+    'location',
+    'payed',
+    'price',
   ],
-  fillable: [
-    "first_name",
-    'last_name',
-    'email',
-    'phone_number'
-  ]
 };
 
 const mutations = {
@@ -57,7 +53,8 @@ const mutations = {
 const actions = {
   async loadResources({ commit }) {
     try {
-      const response = await axios.get("http://more-shots.test/api/customers");
+      const response = await axios.get("http://more-shots.test/api/events");
+      console.log(response.data.data)
       commit("SET_RESOURCES", response.data.data);
     } catch (error) {
       commit("SET_RESOURCES", {});
@@ -66,7 +63,7 @@ const actions = {
   async store({ commit }, payload) {
     try {
       const response = await axios.post(
-        "http://more-shots.test/api/customers",
+        "http://more-shots.test/api/events",
         payload
       );
       commit("ADD_RESOURCE", response.data.data);
@@ -78,7 +75,7 @@ const actions = {
   async update({ commit }, payload) {
     try {
       const response = await axios.put(
-        `http://more-shots.test/api/customers/${payload.id}`,
+        `http://more-shots.test/api/events/${payload.id}`,
         payload
       );
       commit("UPDATE_RESOURCE", response.data.data);
@@ -89,7 +86,7 @@ const actions = {
   },
   async destroy({ commit }, payload) {
     try {
-      axios.delete(`http://more-shots.test/api/customers/${payload.id}`);
+      axios.delete(`http://more-shots.test/api/events/${payload.id}`);
       commit("DESTROY_RESOURCE", payload);
     } catch (error) {
       console.log(error);
@@ -105,7 +102,6 @@ const actions = {
 
 const getters = {
   columns: (state) => state.columns,
-  fillable: (state) => state.fillable,
   isModalVisible: (state) => state.isModalVisible,
   pageTitle: (state) => state.pageTitle,
   resources: (state) => state.resources,
@@ -119,3 +115,4 @@ export default {
   actions,
   getters,
 };
+
