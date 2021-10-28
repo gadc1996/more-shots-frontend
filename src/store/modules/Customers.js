@@ -10,8 +10,8 @@ const state = {
   resources: {},
   isModalVisible: false,
   storeResource: true,
-
-  columns: ["name", "email", "phone_number"],
+  pageTitle: "Customers",
+  columns: ["full_name", "email", "phone_number"],
 };
 
 const mutations = {
@@ -94,9 +94,10 @@ const actions = {
 };
 
 const getters = {
-  resources: (state) => state.resources,
   columns: (state) => state.columns,
   isModalVisible: (state) => state.isModalVisible,
+  pageTitle: (state) => state.pageTitle,
+  resources: (state) => state.resources,
   storeResource: (state) => state.storeResource,
 };
 

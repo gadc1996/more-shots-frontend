@@ -3,17 +3,15 @@
     Modal(:newRecord='newRecord' :storeResource="storeResource" v-if="isModalVisible")
     .tool-bar
       .page-information
-        h1.title Customers
-        h2.subtitle A list of your customers:
+        h1.title {{ pageTitle }}
+        h2.subtitle A list of your {{ pageTitle }}:
       button.add-button(@click="addResource")
         eva-icon(name="plus-outline")
         | Add
     table
       TableHeader(:columns="columns")
       tr(v-for="resource in resources") 
-        td {{ resource.full_name }}
-        td {{ resource.email }}
-        td {{ resource.phone_number }}
+        td(v-for="column in columns") {{resource[column]}}
         td.table-options
           button(@click="updateResource(resource)").update-button
             eva-icon(name="edit-2-outline")
@@ -59,7 +57,13 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["resources", "columns", "isModalVisible", "storeResource"]),
+    ...mapGetters([
+      "columns",
+      "isModalVisible",
+      "pageTitle",
+      "resources",
+      "storeResource",
+    ]),
   },
 };
 </script>
