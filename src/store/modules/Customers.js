@@ -11,17 +11,8 @@ const state = {
   isModalVisible: false,
   storeResource: true,
   pageTitle: "Customers",
-  columns: [
-    "full_name", 
-    "email", 
-    "phone_number"
-  ],
-  fillable: [
-    "first_name",
-    'last_name',
-    'email',
-    'phone_number'
-  ]
+  columns: ["full_name", "email", "phone_number"],
+  fillable: ["first_name", "last_name", "email", "phone_number"],
 };
 
 const mutations = {

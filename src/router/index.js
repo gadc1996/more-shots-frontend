@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: '/dashboard' 
+    redirect: "/dashboard",
   },
   {
     path: "/login",
@@ -33,13 +33,15 @@ const routes = [
       {
         path: "event-types",
         component: () =>
-          import(/* webpackChunkName: "event-types" */ "../views/EventTypes.vue"),
+          import(
+            /* webpackChunkName: "event-types" */ "../views/EventTypes.vue"
+          ),
       },
       {
         path: "waiters",
         component: () =>
           import(/* webpackChunkName: "waiters" */ "../views/Waiters.vue"),
-      }
+      },
     ],
   },
 ];

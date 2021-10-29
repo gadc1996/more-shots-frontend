@@ -12,12 +12,12 @@ const state = {
   storeResource: true,
   pageTitle: "Events",
   columns: [
-    'comments',
-    'datetime',
-    'guests_number',
-    'location',
-    'payed',
-    'price',
+    "comments",
+    "datetime",
+    "guests_number",
+    "location",
+    "payed",
+    "price",
   ],
 };
 
@@ -114,4 +114,3 @@ export default {
   actions,
   getters,
 };
-

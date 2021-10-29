@@ -11,11 +11,7 @@ const state = {
   isModalVisible: false,
   storeResource: true,
   pageTitle: "Waiters",
-  columns: [
-    "full_name", 
-    "email", 
-    "phone_number"
-  ],
+  columns: ["full_name", "email", "phone_number"],
 };
 
 const mutations = {
@@ -51,7 +47,7 @@ const actions = {
   async loadResources({ commit }) {
     try {
       const response = await axios.get("http://more-shots.test/api/waiters");
-      console.log(response.data.data)
+      console.log(response.data.data);
       commit("SET_RESOURCES", response.data.data);
     } catch (error) {
       commit("SET_RESOURCES", {});
@@ -112,6 +108,3 @@ export default {
   actions,
   getters,
 };
-
-
-

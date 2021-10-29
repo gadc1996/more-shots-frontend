@@ -11,9 +11,7 @@ const state = {
   isModalVisible: false,
   storeResource: true,
   pageTitle: "EventTypes",
-  columns: [
-    'name',
-  ],
+  columns: ["name"],
 };
 
 const mutations = {
@@ -48,8 +46,10 @@ const mutations = {
 const actions = {
   async loadResources({ commit }) {
     try {
-      const response = await axios.get("http://more-shots.test/api/event-types");
-      console.log(response.data.data)
+      const response = await axios.get(
+        "http://more-shots.test/api/event-types"
+      );
+      console.log(response.data.data);
       commit("SET_RESOURCES", response.data.data);
     } catch (error) {
       commit("SET_RESOURCES", {});
@@ -110,5 +110,3 @@ export default {
   actions,
   getters,
 };
-
-

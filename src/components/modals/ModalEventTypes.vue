@@ -27,11 +27,7 @@ export default {
     SubmitButton: () => import("@/components/SubmitButton"),
   },
   methods: {
-    ...mapActions([
-    "setModalVisible", 
-    "store", 
-    "update"
-    ]),
+    ...mapActions(["setModalVisible", "store", "update"]),
     submitResource() {
       this.storeResource
         ? this.store(this.newRecord)
