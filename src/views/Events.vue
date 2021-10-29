@@ -78,8 +78,6 @@ export default {
 </script>
 
 <style lang="scss">
-
-
 .events {
   border-radius: 20px 0 0 20px;
   background-color: white;
@@ -178,5 +176,4 @@ export default {
     }
   }
 }
-
 </style>
