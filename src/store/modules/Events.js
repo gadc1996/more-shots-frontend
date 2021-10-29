@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 const state = {
   resources: {},
+  links: {},
   isModalVisible: false,
   storeResource: true,
   pageTitle: "Events",
@@ -24,6 +25,9 @@ const state = {
 const mutations = {
   SET_RESOURCES(state, payload) {
     state.resources = payload;
+  },
+  SET_LINKS(state, payload) {
+    state.links = payload;
   },
   SET_MODAL_VISIBLE(state, payload) {
     state.isModalVisible = payload;
@@ -55,6 +59,7 @@ const actions = {
     try {
       const response = await axios.get("http://more-shots.test/api/events");
       commit("SET_RESOURCES", response.data.data);
+      commit("SET_LINKS", response.data.links);
     } catch (error) {
       commit("SET_RESOURCES", {});
     }
@@ -97,6 +102,24 @@ const actions = {
   setAddResource({ commit }, payload) {
     commit("SET_STORE_RESOURCE", payload);
   },
+  async loadPreviousResources({ commit, state }) {
+    try {
+      const response = await axios.get(state.links.prev);
+      commit("SET_RESOURCES", response.data.data);
+      commit("SET_LINKS", response.data.links);
+    } catch (error) {
+      commit("SET_RESOURCES", {});
+    }
+  },
+  async loadNextResources({ commit, state }) {
+    try {
+      const response = await axios.get(state.links.next);
+      commit("SET_RESOURCES", response.data.data);
+      commit("SET_LINKS", response.data.links);
+    } catch (error) {
+      commit("SET_RESOURCES", {});
+    }
+  },
 };
 
 const getters = {
@@ -105,6 +128,7 @@ const getters = {
   pageTitle: (state) => state.pageTitle,
   resources: (state) => state.resources,
   storeResource: (state) => state.storeResource,
+  links: (state) => state.links,
 };
 
 export default {
