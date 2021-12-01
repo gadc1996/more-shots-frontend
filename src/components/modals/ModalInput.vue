@@ -1,24 +1,20 @@
 <template lang="pug">
-  .login-input
-    eva-icon.icon(:name="icon") 
-    input(:placeholder="placeholder" @input="$emit('input', $event.target.value)")
+  .modal-input
+    input(:placeholder="placeholder" @input="$emit('input', $event.target.value)" :value="value")
 </template>
 <script>
 export default {
-  name: "LoginInput",
+  name: "ModalInput",
   props: {
     placeholder: String,
-    icon: String,
     newRecord: Object,
+    value: String,
   },
 };
 </script>
 
 <style lang="scss">
-.login-input {
-  display: grid;
-  grid-template-colums: 1fr;
-  grid-column-gap: 10px;
+.modal-input {
   border: 2px solid transparent;
   box-shadow: 0px 0px;
   align-items: center;
@@ -31,7 +27,6 @@ export default {
     border: 2px solid black;
   }
 
-  .icon,
   input {
     grid-row-start: 1;
   }
